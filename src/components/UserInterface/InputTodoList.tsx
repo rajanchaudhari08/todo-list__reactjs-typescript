@@ -1,10 +1,10 @@
 import { Fragment } from "react";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { TodoListContext } from "../../TodoListContext/todolist-context";
 import styles from "./InputTodoList.module.css";
 
-const InputTodoList: React.FC<{ onInputTodoList: (text: string) => void }> = (
-  properties
-) => {
+const InputTodoList: React.FC = () => {
+  const todolistContext = useContext(TodoListContext);
   const refInputTitle = useRef<HTMLInputElement>(null);
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -12,7 +12,7 @@ const InputTodoList: React.FC<{ onInputTodoList: (text: string) => void }> = (
     if (inputTitle.trim().length === 0) {
       return;
     }
-    properties.onInputTodoList(inputTitle);
+    todolistContext.addTodoList(inputTitle);
   };
   return (
     <Fragment>

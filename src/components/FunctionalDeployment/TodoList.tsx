@@ -1,21 +1,22 @@
-import { Fragment } from "react";
-import TodoListDataModel from "../../DataModel/TodoListDataModel";
+import { Fragment, useContext } from "react";
 import TodoListItem from "./TodoListItem";
+import { TodoListContext } from "../../TodoListContext/todolist-context";
 import styles from "./TodoList.module.css";
 
-const TodoList: React.FC<{
-  lists: TodoListDataModel[];
-  onDeleteTodoList: () => void;
-}> = (properties) => {
+const TodoList: React.FC = () => {
+  const todolistContext = useContext(TodoListContext);
   return (
     <Fragment>
       <ul className={styles.todolist}>
-        {properties.lists.map((list) => (
+        {todolistContext.lists.map((list) => (
           //   <li key={list.id}>{list.text}</li>
           <TodoListItem
             key={list.id}
             text={list.text}
-            onDeleteTodoList={properties.onDeleteTodoList.bind(null, list.id)}
+            onDeleteTodoList={todolistContext.deleteTodoList.bind(
+              null,
+              list.id
+            )}
           />
         ))}
       </ul>
