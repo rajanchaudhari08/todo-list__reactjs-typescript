@@ -12,10 +12,15 @@ const App = () => {
       return previousTodoList.concat(inputTodoList);
     });
   };
+  const deleteTodoListHandler = (listID: string) => {
+    setTodoList((previousTodoList) => {
+      return previousTodoList.filter((todolist) => todolist.id !== listID);
+    });
+  };
   return (
     <Fragment>
       <InputTodoList onInputTodoList={inputTodoListHandler} />
-      <TodoList lists={todolist} />
+      <TodoList lists={todolist} onDeleteTodoList={deleteTodoListHandler} />
     </Fragment>
   );
 };
