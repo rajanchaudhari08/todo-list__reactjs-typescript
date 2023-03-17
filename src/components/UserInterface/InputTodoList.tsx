@@ -13,6 +13,7 @@ const InputTodoList: React.FC = () => {
       return;
     }
     todolistContext.addTodoList(inputTitle);
+    refInputTitle.current.value = "";
   };
   return (
     <Fragment>
